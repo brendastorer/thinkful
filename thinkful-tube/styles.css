@@ -12,7 +12,7 @@ a {
 
 a:focus,
 a:hover {
-  color: #e93036;
+  color: #c4292e;
 }
 
 label {
@@ -38,7 +38,7 @@ input[type="text"]:focus {
 }
 
 button {
-  background-color: #e93036;
+  background-color: #c4292e;
   border: 0;
   border-radius: 9999px;
   color: white;
@@ -55,6 +55,12 @@ button {
 button:focus,
 button:hover {
   background-color: #01abdb;
+}
+
+button:focus {
+  box-shadow: 0 0 0 2px white,
+              0 0 0 4px #c4292e;
+  outline: none;
 }
 
 .search-form {
@@ -81,7 +87,8 @@ button:hover {
 .search-results__link:focus,
 .search-results__link:hover {
   border-color: currentColor;
-  color: #e93036;
+  color: #c4292e;
+  outline: none;
 }
 
 .search-results__thumbnail {

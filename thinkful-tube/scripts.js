@@ -8,7 +8,7 @@ function getDataFromApi(searchTerm, callback) {
     q: searchTerm,
     key: YOUTUBE_API_KEY
   }
-  const result = $.getJSON(YOUTUBE_SEARCH_URL, query, callback);
+  const result = $.getJSON(YOUTUBE_SEARCH_URL, query, callback).fail(showError);
 }
 
 function renderResult(result) {
@@ -20,17 +20,25 @@ function renderResult(result) {
   return `
     <li class="search-results__item">
       <a class="search-results__link" href="${url}" target="_blank">
-        <img class="search-results__thumbnail" src="${thumbnail}" />
+        <img class="search-results__thumbnail" src="${thumbnail}" alt="" />
         <h2 class="search-results__title">${title}</h2>
       </a>
     </li>
   `;
 }
 
+function showError(error) {
+  const errorMessage = (
+    `<p>Sorry, something went wrong. ${error}</p>`
+  );
+  
+  $(".js-search-results").empty().append(errorMessage);
+}
+
 function displayYouTubeSearchData(data) {
   const resultsContainer = $(".js-search-results");
   
-  resultsContainer.empty();
+  resultsContainer.empty().prop("hidden", false);
   data.items.forEach(function(item) {
     resultsContainer.append(renderResult(item));
   });
